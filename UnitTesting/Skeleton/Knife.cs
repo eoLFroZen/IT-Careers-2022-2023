@@ -1,10 +1,12 @@
 ﻿// Axe durability drop with 5 
-public class Axe
+using Skeleton;
+
+public class Knife : IWeapon
 {
     private int attackPoints;
     private int durabilityPoints;
 
-    public Axe(int attack, int durability)
+    public Knife(int attack, int durability)
     {
         this.attackPoints = attack;
         this.durabilityPoints = durability;
@@ -20,7 +22,7 @@ public class Axe
         get { return this.durabilityPoints; }
     }
 
-    public void Attack(Dummy target)
+    public void Attack(ITarget target)
     {
         if (this.durabilityPoints <= 0)
         {
