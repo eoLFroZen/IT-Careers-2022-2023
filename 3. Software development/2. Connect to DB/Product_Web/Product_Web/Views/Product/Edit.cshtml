@@ -4,25 +4,29 @@
 *@
 @{
 }
-<h2> Edit Product</h2>
 
-<form method="post" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id">
-    <p>
-        <span>Name:</span>
-        <input type="text" name="name" value="@Model.Name" />
-    </p>
-    <p>
-        <span>Price:</span>
-        <input type="number" name="price" value="@Model.Price" />
-    </p>
-    <p>
-        <span>Stock:</span>
-        <input type="number" name="stock" value="@Model.Stock" />
-    </p>
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <h2> Edit Product</h2>
 
-    <button type="submit">Edit Product</button>
+    <form method="post" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id">
+        <p>
+            <span>Name:</span>
+            <input type="text" name="name" value="@Model.Name" />
+        </p>
+        <p>
+            <span>Price:</span>
+            <input type="number" name="price" value="@Model.Price" />
+        </p>
+        <p>
+            <span>Stock:</span>
+            <input type="number" name="stock" value="@Model.Stock" />
+        </p>
 
-    <button>
-        <a asp-controller="Product" asp-action="Index">Cancel</a>
-    </button>
-</form>
+        <button type="submit">Edit Product</button>
+
+        <button>
+            <a asp-controller="Product" asp-action="Index">Cancel</a>
+        </button>
+    </form>
+}

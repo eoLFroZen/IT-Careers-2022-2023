@@ -1,0 +1,22 @@
+﻿@using Product_Web.Data.ViewModels.User
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var users = Model;
+}
+
+@model IEnumerable<UserViewModel>
+
+@if (User.Identity?.IsAuthenticated ?? false && User.IsInRole("admin"))
+{
+    <h1>Users:</h1>
+
+    @foreach (var user in users)
+    {
+        var currentColor = user.IsAdmin ? "red" : "green";
+        <p style="color: @currentColor;">@user.Email</p>
+
+
+}
+}

@@ -6,19 +6,22 @@
 
 @model List<Product>
 
-@foreach (var product in Model)
+@if (User.Identity?.IsAuthenticated ?? false)
 {
-    <div>
-        <p>Product Name: @product.Name</p>
-        <p>Product Price: @product.Price</p>
-        <p>Product Stock: @product.Stock</p>
+    @foreach (var product in Model)
+    {
+        <div>
+            <p>Product Name: @product.Name</p>
+            <p>Product Price: @product.Price</p>
+            <p>Product Stock: @product.Stock</p>
 
-        <button>
-            <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id">Edit</a>
-        </button>
+            <button>
+                <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id">Edit</a>
+            </button>
 
-        <button>
-            <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id">Delete</a>
-        </button>
-    </div>
+            <button>
+                <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id">Delete</a>
+            </button>
+        </div>
+    }
 }

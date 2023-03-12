@@ -4,21 +4,24 @@
 @{
 }
 
-<h2> Create Product</h2>
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <h2> Create Product</h2>
 
-<form method="post" asp-controller="Product" asp-action="Create">
-    <p>
-        <span>Name:</span>
-        <input type="text" name="name" />
-    </p>
-    <p>
-        <span>Price:</span>
-        <input type="number" name="price" />
-    </p>
+    <form method="post" asp-controller="Product" asp-action="Create">
         <p>
-        <span>Stock:</span>
-        <input type="number" name="stock" />
-    </p>
+            <span>Name:</span>
+            <input type="text" name="name" />
+        </p>
+        <p>
+            <span>Price:</span>
+            <input type="number" name="price" />
+        </p>
+            <p>
+            <span>Stock:</span>
+            <input type="number" name="stock" />
+        </p>
 
-    <button type="submit">Create Product</button>
-</form>
+        <button type="submit">Create Product</button>
+    </form>
+}

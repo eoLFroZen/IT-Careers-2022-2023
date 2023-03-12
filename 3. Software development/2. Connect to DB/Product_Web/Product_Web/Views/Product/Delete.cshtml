@@ -4,24 +4,28 @@
 *@
 @{
 }
-<h2> Delete Product</h2>
 
-<form method="post" asp-controller="Product" asp-action="DeleteConfirm" asp-route-id="@Model.Id">
-    <p>
-        <span>Name:</span>
-        <input type="text" name="name" value="@Model.Name" disabled />
-    </p>
-    <p>
-        <span>Price:</span>
-        <input type="number" name="price" value="@Model.Price" disabled />
-    </p>
-    <p>
-        <span>Stock:</span>
-        <input type="number" name="stock" value="@Model.Stock" disabled />
-    </p>
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <h2> Delete Product</h2>
 
-    <button type="submit">Delete Product</button>
-    <button>
-        <a asp-controller="Product" asp-action="Index">Cancel</a>
-    </button>
-</form>
+    <form method="post" asp-controller="Product" asp-action="DeleteConfirm" asp-route-id="@Model.Id">
+        <p>
+            <span>Name:</span>
+            <input type="text" name="name" value="@Model.Name" disabled />
+        </p>
+        <p>
+            <span>Price:</span>
+            <input type="number" name="price" value="@Model.Price" disabled />
+        </p>
+        <p>
+            <span>Stock:</span>
+            <input type="number" name="stock" value="@Model.Stock" disabled />
+        </p>
+
+        <button type="submit">Delete Product</button>
+        <button>
+            <a asp-controller="Product" asp-action="Index">Cancel</a>
+        </button>
+    </form>
+}
