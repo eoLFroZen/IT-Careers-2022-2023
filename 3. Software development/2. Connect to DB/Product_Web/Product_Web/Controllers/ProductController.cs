@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Product_Web.Services.Interfaces;
 using Product_Web_App.Data.Entities;
-using Product_Web_App.Services;
 
 namespace Product_Web_App.Controllers
 {
     public class ProductController : Controller
     {
 
-        private ProductService productService;
+        private IProductService productService;
 
-        public ProductController(ProductService productService)
+        public ProductController(IProductService productService)
         {
             this.productService = productService;
         }
 
         public IActionResult Index()
         {
-            List<Product> products = productService.GetAll();
+            var products = productService.GetAll();
 
             return View(products);
         }
@@ -30,12 +30,14 @@ namespace Product_Web_App.Controllers
         public IActionResult Create(Product product)
         {
             productService.Add(product);
+
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(int id)
         {
-            Product product = productService.GetById(id);
+            var product = productService.GetById(id);
+
             return View(product);
         }
 
@@ -43,11 +45,13 @@ namespace Product_Web_App.Controllers
         public IActionResult Edit(Product product)
         {
             productService.Edit(product);
+
             return RedirectToAction(nameof(Index));
         }
         public IActionResult Delete(int id)
         {
-            Product product = productService.GetById(id);
+            var product = productService.GetById(id);
+
             return View(product);
         }
 
@@ -55,6 +59,7 @@ namespace Product_Web_App.Controllers
         public IActionResult DeleteConfirm(int id)
         {
             productService.Delete(id);
+
             return RedirectToAction(nameof(Index));
         }
     }

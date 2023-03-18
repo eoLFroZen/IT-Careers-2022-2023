@@ -1,26 +1,28 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Product_Web.Data.Entities;
 using Product_Web.Data.ViewModels.User;
+using Product_Web.Repositories.Interfaces;
+using Product_Web.Services.Interfaces;
 using Product_Web_App.Data;
 
 namespace Product_Web.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
-        private readonly ApplicationContext context;
         private readonly UserManager<User> userManager;
+        private readonly IUserRepository userRepository;
 
         public UserService(
-            ApplicationContext context,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            IUserRepository userRepository)
         {
-            this.context = context;
             this.userManager = userManager;
+            this.userRepository = userRepository;
         }
 
         public async Task<IEnumerable<UserViewModel>> GetAll()
         {
-            var users = context.Users.ToList();
+            var users = userRepository.GetAll();
 
             var userViewModels = new List<UserViewModel>();
             foreach (var user in users)

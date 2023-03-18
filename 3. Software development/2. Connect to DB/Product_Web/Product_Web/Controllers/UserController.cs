@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Product_Web.Services;
+using Product_Web.Services.Interfaces;
 
 namespace Product_Web.Controllers
 {
     public class UserController : Controller
     {
-        private readonly UserService userService;
+        private readonly IUserService userService;
 
-        public UserController(UserService userService)
+        public UserController(IUserService userService)
         {
             this.userService = userService;
         }
@@ -15,6 +15,7 @@ namespace Product_Web.Controllers
         public async Task<IActionResult> Index()
         {
             var users = await userService.GetAll();
+
             return View(users);
         }
     }

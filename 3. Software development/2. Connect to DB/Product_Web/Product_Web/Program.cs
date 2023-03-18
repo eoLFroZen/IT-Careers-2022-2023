@@ -4,6 +4,9 @@ using Product_Web_App.Services;
 using Product_Web.Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Product_Web.Services;
+using Product_Web.Services.Interfaces;
+using Product_Web.Repositories.Interfaces;
+using Product_Web.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = 
@@ -24,8 +27,10 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 })
     .AddEntityFrameworkStores<ApplicationContext>();
 
-builder.Services.AddScoped<ProductService, ProductService>();
-builder.Services.AddScoped<UserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddRazorPages();
 

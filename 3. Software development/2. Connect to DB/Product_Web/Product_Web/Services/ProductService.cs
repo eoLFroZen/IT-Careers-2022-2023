@@ -1,42 +1,36 @@
-﻿using Product_Web_App.Data;
+﻿using Product_Web.Constants;
+using Product_Web.Repositories.Interfaces;
+using Product_Web.Services.Interfaces;
 using Product_Web_App.Data.Entities;
 
 namespace Product_Web_App.Services
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
-        private ApplicationContext context;
+        private IProductRepository productRepository;
 
-        public ProductService(ApplicationContext context)
+        public ProductService(IProductRepository productRepository)
         {
-            this.context = context;
+            this.productRepository = productRepository;
         }
 
-        public List<Product> GetAll()
-        {
-            return context.Products.ToList();
-        }
+        public IEnumerable<Product> GetAll()
+            => productRepository.GetAll();
+
         public Product GetById(int id)
-        {
-            return context.Products.FirstOrDefault(p => p.Id == id);
-        }
+            => productRepository.GetById(id);
 
         public void Add(Product product)
         {
-            context.Products.Add(product);
-            context.SaveChanges();
+            product.Price += product.Price * ProductConstants.VAT;
+
+            productRepository.Add(product);
         }
 
         public void Edit(Product product)
-        {
-            context.Products.Update(product);
-            context.SaveChanges();
-        }
+            => productRepository.Edit(product);
 
         public void Delete(int id)
-        {
-            context.Products.Remove(GetById(id));
-            context.SaveChanges();
-        }
+            => productRepository.Delete(id);
     }
 }
