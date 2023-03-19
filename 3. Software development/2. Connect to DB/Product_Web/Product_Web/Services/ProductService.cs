@@ -22,7 +22,8 @@ namespace Product_Web_App.Services
 
         public void Add(Product product)
         {
-            product.Price += product.Price * ProductConstants.VAT;
+            // TODO
+            //product.Price += product.Price * ProductConstants.VAT;
 
             productRepository.Add(product);
         }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Product_Web.Services.Interfaces;
+using System.Security.Claims;
 using Product_Web_App.Data.Entities;
 
 namespace Product_Web_App.Controllers
@@ -23,12 +24,15 @@ namespace Product_Web_App.Controllers
 
         public IActionResult Create()
         {
+            
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Product product)
         {
+            // Get User email
+            //string email = User.Identity.Name;
             productService.Add(product);
 
             return RedirectToAction(nameof(Index));

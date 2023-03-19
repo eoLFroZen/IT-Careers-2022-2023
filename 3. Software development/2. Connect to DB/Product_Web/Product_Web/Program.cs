@@ -7,6 +7,7 @@ using Product_Web.Services;
 using Product_Web.Services.Interfaces;
 using Product_Web.Repositories.Interfaces;
 using Product_Web.Repositories;
+using Product_Web.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = 
@@ -36,6 +37,7 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -48,6 +50,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+Seed.SeedData(app);
+
 app.UseAuthentication();;
 
 app.UseAuthorization();

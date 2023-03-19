@@ -35,6 +35,10 @@ namespace Product_Web.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            //[Required]
+            //[Display(Name = "Username")]
+            //public string Username { get; set; }
+
             [Required]
             [StringLength(
                 100, 
@@ -81,10 +85,9 @@ namespace Product_Web.Areas.Identity.Pages.Account
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
-                await _userManager.AddToRoleAsync(user, "user");
-
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "user");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
@@ -102,7 +105,7 @@ namespace Product_Web.Areas.Identity.Pages.Account
         private User CreateUser()
             => new User()
             {
-                Id = new Guid().ToString(),
+                Id = Guid.NewGuid().ToString(),
                 Email = Input.Email,
                 UserName = Input.Email,
                 Name = Input.Name,

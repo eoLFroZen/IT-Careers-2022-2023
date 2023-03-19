@@ -2,6 +2,6 @@
 {
     public static class ProductConstants
     {
-        public const decimal VAT = (decimal)0.2;
+        public const decimal VAT = 0.2m;
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Product_Web.Data.Entities;
 using Product_Web_App.Data.Entities;
+using System.Reflection.Emit;
 
 namespace Product_Web_App.Data
 {
@@ -13,7 +14,6 @@ namespace Product_Web_App.Data
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
-
         }
     }
 }
